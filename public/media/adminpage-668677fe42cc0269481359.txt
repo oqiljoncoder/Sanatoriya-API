@@ -1,0 +1,116 @@
+<script setup>
+import FormInput from "@/components/tags/FormInput.vue";
+import FormButton from "@/components/tags/FormButton.vue";
+import {ref} from "vue";
+
+let query = ref('?page=1')
+let email = ref(null)
+let phone = ref(null)
+let before = ref(null)
+let after = ref(null)
+
+function search() {
+    console.log(email.value, phone.value, before.value, after.value)
+}
+
+function clear() {
+    document.getElementById('email').value = ''
+    document.getElementById('phone').value = ''
+    document.getElementById('before').value = ''
+    document.getElementById('after').value = ''
+    email.value = null
+    phone.value = null
+    before.value = null
+    after.value = null
+}
+
+let currentPage = ref(1)
+
+function changePage(value) {
+    console.log(value)
+}
+
+</script>
+
+<template>
+    <div class="mt-5 mx-lg-5" style="min-height: 70vh">
+        <div class="row justify-content-center">
+            <FormInput v-model="email" props-id="email" label-name="email" class="col-12 col-sm-6 col-md-4 col-lg-2"/>
+            <FormInput v-model="phone" props-id="phone" label-name="telefon" class="col-12 col-sm-6 col-md-4 col-lg-2"/>
+            <FormInput v-model="before" props-id="before" label-name="dan avval" input-type="date" class="col-12 col-sm-6 col-md-4 col-lg-2"/>
+            <FormInput v-model="after" props-id="after" label-name="dan kegin" input-type="date" class="col-12 col-sm-6 col-md-4 col-lg-2"/>
+            <div class="col-6 col-md-4 col-lg-2 align-self-end mb-3">
+                <FormButton @click="search()" text="izlash" class="btn-outline-success w-100"/>
+            </div>
+            <div class="col-6 col-md-4 col-lg-2 align-self-end mb-3">
+                <FormButton @click="clear()" text="tozalash" class="btn-outline-danger w-100"/>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>#</th><th>email</th><th>yosh</th><th>telefon</th><th>jins</th><th>registratsiya vaqti</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>1</th>
+                        <td>a@a.com</td>
+                        <td>22</td>
+                        <td>1234567</td>
+                        <td>erkak</td>
+                        <td>2024-10-05</td>
+                    </tr>
+                    <tr>
+                        <th>2</th>
+                        <td>b@b.com</td>
+                        <td>33</td>
+                        <td>1234567</td>
+                        <td>erkak</td>
+                        <td>2024-10-05</td>
+                    </tr>
+                    <tr>
+                        <th>3</th>
+                        <td>c@c.com</td>
+                        <td>44</td>
+                        <td>1234567</td>
+                        <td>erkak</td>
+                        <td>2024-10-05</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <nav>
+            <div class="me-3">Jami: 114</div>
+
+            <ul class="pagination justify-content-end">
+                <li>
+                    <span @click="changePage(1)" class="page-link rounded">prev</span>
+                </li>
+                <li class="page-item mx-1">
+                    <span @click="changePage(1)" class="page-link rounded">1</span>
+                </li>
+                <li class="page-item mx-1">
+                    <span @click="changePage(2)" class="page-link rounded">2</span>
+                </li>
+                <li class="page-item mx-1">
+                    <span @click="changePage(3)" class="page-link rounded">3</span>
+                </li>
+                <li>
+                    <span @click="changePage(17)" class="page-link rounded">last</span>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</template>
+
+<style scoped>
+.page-link:hover {
+    cursor: pointer;
+    box-shadow: 0 0 2px 0;
+}
+</style>
+

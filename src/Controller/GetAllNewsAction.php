@@ -1,0 +1,15 @@
+<?php
+
+namespace App\Controller;
+
+use App\Repository\NewPageRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
+class GetAllNewsAction extends AbstractController
+{
+    public function __invoke(NewPageRepository $newPageRepository)
+    {
+        return $newPageRepository->findLastAllNews();
+
+    }
+}
